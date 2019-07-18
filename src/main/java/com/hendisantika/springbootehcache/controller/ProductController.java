@@ -1,9 +1,13 @@
 package com.hendisantika.springbootehcache.controller;
 
+import com.hendisantika.springbootehcache.model.Product;
 import com.hendisantika.springbootehcache.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.Optional;
 
 /**
  * Created by IntelliJ IDEA.
@@ -19,4 +23,21 @@ import org.springframework.web.bind.annotation.RestController;
 public class ProductController {
     @Autowired
     private ProductService pserv;
+
+    /**
+     * Method to fetch product details on the basis of product id.
+     *
+     * @param productId
+     * @return
+     */
+    @GetMapping(value = "/{product-id}")
+    @ResponseBody
+    public ResponseEntity<Product> getProductById(@PathVariable("product-id") int productId) {
+        Optional<Product> product = pserv.getProductById(productId);
+        if (!product.isPresent())
+            return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
+
+        return new ResponseEntity<Product>(product.get(), HttpStatus.OK);
+    }
+
 }

@@ -40,4 +40,20 @@ public class ProductController {
         return new ResponseEntity<Product>(product.get(), HttpStatus.OK);
     }
 
+    /**
+     * Method to update product on the basis of product id.
+     *
+     * @param productId
+     * @param productName
+     * @return
+     */
+    @PutMapping(value = "/{product-id}/{product-name}")
+    public ResponseEntity<Product> updateTicketById(@PathVariable("product-id") int productId, @PathVariable("product-name") String productName) {
+        Optional<Product> product = pserv.getProductById(productId);
+        if (!product.isPresent())
+            return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
+
+        return new ResponseEntity<Product>(pserv.updateProductById(product.get(), productName), HttpStatus.OK);
+    }
+
 }

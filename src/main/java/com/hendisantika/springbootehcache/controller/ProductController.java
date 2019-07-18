@@ -56,4 +56,19 @@ public class ProductController {
         return new ResponseEntity<Product>(pserv.updateProductById(product.get(), productName), HttpStatus.OK);
     }
 
+    /**
+     * Method to delete product on the basis of product id.
+     *
+     * @param productId
+     */
+    @DeleteMapping(value = "/{product-id}")
+    public ResponseEntity<Product> deleteProductById(@PathVariable("product-id") int productId) {
+        Optional<Product> product = pserv.getProductById(productId);
+        if (!product.isPresent())
+            return new ResponseEntity<Product>(HttpStatus.NOT_FOUND);
+
+        pserv.deleteProductById(productId);
+        return new ResponseEntity<Product>(HttpStatus.ACCEPTED);
+    }
+
 }

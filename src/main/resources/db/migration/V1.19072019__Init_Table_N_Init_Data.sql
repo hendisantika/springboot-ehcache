@@ -1,8 +1,8 @@
 create table if not exists person (
-    id int(10) not null auto_increment,
-    nickname varchar(50) not null,
-    email VARCHAR(50) NOT null UNIQUE ,
-    primary key  (id)
+                                      id       bigint(10)  NOT NULL AUTO_INCREMENT,
+                                      nickname varchar(50) not null,
+                                      email    VARCHAR(50) NOT null UNIQUE ,
+                                      primary key  (id)
 );
 
 create table if not exists product (

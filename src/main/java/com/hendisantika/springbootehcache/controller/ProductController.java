@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -19,10 +20,21 @@ import java.util.Optional;
  * Time: 05:16
  */
 @RestController
-@RequestMapping(value = "/api/product")
+@RequestMapping(value = "/api/products")
 public class ProductController {
     @Autowired
     private ProductService pserv;
+
+    @GetMapping
+    @ResponseBody
+    public ResponseEntity<List<Product>> getAllProducts() {
+        List<Product> products = pserv.getAllProducts();
+        if (products.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(products, HttpStatus.OK);
+    }
 
     /**
      * Method to fetch product details on the basis of product id.

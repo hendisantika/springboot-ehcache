@@ -8,6 +8,7 @@ import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -23,6 +24,11 @@ import java.util.Optional;
 public class ProductService {
     @Autowired
     private ProductRepository productRepository;
+
+    @Cacheable(value = "productsCache")
+    public List<Product> getAllProducts() {
+        return (List<Product>) productRepository.findAll();
+    }
 
     /**
      * Method to fetch product details on the basis of product id.

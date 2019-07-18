@@ -3,6 +3,7 @@ package com.hendisantika.springbootehcache.service;
 import com.hendisantika.springbootehcache.model.Person;
 import com.hendisantika.springbootehcache.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,6 +23,7 @@ public class PersonServiceImpl implements PersonService {
     @Autowired
     private PersonRepository personRepository;
 
+    @Cacheable(value = "personsCache")
     public List<Person> getAll() {
         return personRepository.findAll();
     }

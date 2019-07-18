@@ -1,0 +1,32 @@
+package com.hendisantika.springbootehcache.model;
+
+import lombok.Data;
+
+import javax.persistence.*;
+import java.math.BigDecimal;
+
+/**
+ * Created by IntelliJ IDEA.
+ * Project : springboot-ehcache
+ * User: hendisantika
+ * Email: hendisantika@gmail.com
+ * Telegram : @hendisantika34
+ * Date: 2019-07-19
+ * Time: 05:11
+ */
+@Entity
+@Table(name = "product")
+@Data
+public class Product {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "product_id")
+    private int id;
+
+    @Column(name = "product_name")
+    private String name;
+
+    @Column(name = "product_price")
+    private BigDecimal price;
+}

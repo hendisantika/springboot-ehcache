@@ -2,8 +2,6 @@ package com.hendisantika.springbootehcache;
 
 import com.hendisantika.springbootehcache.model.Person;
 import com.hendisantika.springbootehcache.repository.PersonRepository;
-import com.hendisantika.springbootehcache.service.ProductService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -16,9 +14,6 @@ import java.util.List;
 @SpringBootApplication
 @EnableCaching
 public class SpringbootEhcacheApplication {
-    @Autowired
-    private ProductService productService;
-
     private List<Person> persons = Arrays.asList(
             new Person(1L, "naruto", "uzumaki.naruto@konohagakure.com"),
             new Person(2L, "sasuke", "uchiha.sasuke@konohagakure.com"),
@@ -32,14 +27,6 @@ public class SpringbootEhcacheApplication {
         return args -> {
             personRepository.deleteAll();
             persons.forEach(person -> personRepository.save(person));
-
-            //This will hit the database
-            System.out.println(productService.getProductById(1));
-
-            //This will hit the cache - verify the message in console output
-            System.out.println(productService.getProductById(1));
-
-            //Access cache instance by name
         };
     }
 

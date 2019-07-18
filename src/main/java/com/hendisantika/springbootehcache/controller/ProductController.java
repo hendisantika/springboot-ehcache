@@ -7,7 +7,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 
 /**
@@ -24,21 +23,6 @@ import java.util.Optional;
 public class ProductController {
     @Autowired
     private ProductService pserv;
-
-    /**
-     * Method to fetch product details on the basis of product id.
-     */
-    @GetMapping(value = "/")
-    @ResponseBody
-    public ResponseEntity<Iterable<Product>> getAllProducts() {
-        List<Product> product = (List<Product>) pserv.getAllProducts();
-        if (product.isEmpty()) {
-            return new ResponseEntity<Iterable<Product>>(HttpStatus.NOT_FOUND);
-        }
-
-        return new ResponseEntity<Iterable<Product>>(product, HttpStatus.OK);
-    }
-
 
     /**
      * Method to fetch product details on the basis of product id.

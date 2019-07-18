@@ -25,14 +25,6 @@ public class ProductService {
     private ProductRepository productRepository;
 
     /**
-     * Method to fetch all products list.
-     */
-    @Cacheable(value = "productsCache")
-    public Iterable<Product> getAllProducts() {
-        return productRepository.findAll();
-    }
-
-    /**
      * Method to fetch product details on the basis of product id.
      *
      * @param productId
